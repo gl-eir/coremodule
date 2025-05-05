@@ -1,0 +1,24 @@
+server:
+  port: 8081
+  servlet:
+    #context-path: /flowManager
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  application:
+    name: flow-manager
+  datasource:
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    username: sa
+    password: sa
+  driver-class-name: org:h2.Driver
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: update
+        dialect: org.hibernate.dialect.H2Dialect
+
+

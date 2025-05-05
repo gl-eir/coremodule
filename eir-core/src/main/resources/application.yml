@@ -1,0 +1,95 @@
+server:
+  port: 8071
+  servlet:
+    context-path: /eir_api
+spring:
+  application:
+    name: flow-manager
+    type: DB #CACHE , DB
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/app
+    #?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: ENC(jxNzi7e8T94AnHUxgizmuQ==)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: SELECT 1
+    max-active: 15
+    max-idle: 10
+    max-wait: 8000
+  jpa:
+    #properties:
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      show-sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+eir:
+  udp:
+    server:
+      port: 7001
+
+identity-check:
+  udp-handler:
+    thread-pool:
+      corePoolSize: 5
+      maximumPoolSize: 10
+      keepAliveTime: 5
+      queueSize: 500
+
+info-mapper:
+  enable: true
+
+edr:
+  server:
+    ip: 127.0.0.1
+    port: 8004
+
+domestic-imsie-prefix: 455,4556
+
+files:
+  path: D:/
+
+
+alerts:
+  enable: true
+  postUrl: http://10.100.2.231:9504/eirs/alert
+  processId: 23
+  alerts-mapping:
+    IMEI_MISSING_IN_REQUEST:
+      alertId: ALERT1101
+      message: "Core Module IMEI Missing in Request SessionId:<TID>"
+      enable:
+    UDP_QUEUE_SIZE_INCREASED:
+      alertId: ALERT1101
+      message: "Core Module UDP Queue size Increased Size:<QUEUE_SIZE>"
+      enable:
+    IMSI_MISSING_IN_REQUEST:
+      alertId: ALERT1101
+      message: "Core Module IMSI Missing in Request tid:<TID>"
+      enable:
+    IMEI_VALIDATIONS_FAILED:
+      alertId: ALERT1101
+      message: "Core Module IMEI validation IMEI:<IMEI> REASON: <REASON_CODE>"
+      enable:
+
+trace-request:
+  ip: 127.0.0.1
+  port: 1212
+  traceBlackFlag: true
+  traceGreyFlag: false
+
+imeiNullPattern:
+
+
+jasypt:
+  encryptor:
+    password: eir
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
